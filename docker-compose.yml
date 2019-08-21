@@ -1,0 +1,31 @@
+version: '3.6'
+
+services:
+  users:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - '/usr/src/app'
+    ports:
+      - 5001:5000
+    environment:
+      - BETTER_EXCEPTIONS=1
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - APP_SETTINGS=service.config.DevelopmentConfig
+      - SECRET_KEY='lets kick ass and chew bubble gum'
+      - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev
+      - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
+    depends_on:
+      - users-db
+
+  users-db:
+    build:
+      context: ./service/db
+      dockerfile: Dockerfile
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
