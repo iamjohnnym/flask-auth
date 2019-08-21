@@ -1,9 +1,8 @@
 # Flask-Auth
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)](https://forthebadge.com)
-
 [![Build Status](https://travis-ci.com/iamjohnnym/flask-auth.svg?branch=master)](https://travis-ci.com/iamjohnnym/flask-auth)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a4a65c2fa1934ee29e454e2fba330c4c)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=iamjohnnym/flask-auth&amp;utm_campaign=Badge_Grade)
+[![Docker Repository on Quay](https://quay.io/repository/iamjohnnym/flask-auth/status?token=844b7e1a-eef3-4832-9afb-0e00ab7f2f14 "Docker Repository on Quay")](https://quay.io/repository/iamjohnnym/flask-auth)
 
 A restful service for managing users via jwt authentication.
 
@@ -12,6 +11,8 @@ A restful service for managing users via jwt authentication.
 - [Flask-Auth](#flask-auth)
   - [Table of contents](#table-of-contents)
   - [Libraries](#libraries)
+    - [Python Packages](#python-packages)
+    - [Optional Integrations](#optional-integrations)
   - [Usage](#usage)
     - [Docker Compose](#docker-compose)
       - [Build DC](#build-dc)
@@ -29,17 +30,21 @@ A restful service for managing users via jwt authentication.
 
 [(Back to top)](#table-of-contents)
 
-Usable with or without Docker.
+### Python Packages
 
 - [Poetry](https://poetry.eustace.io/): Python packaging and dependency management
 - [Flask](https://palletsprojects.com/p/flask/): Python micro web framework
 - [Flask-Restplus](https://flask-restplus.readthedocs.io/en/stable/): Flask-RESTPlus encourages best practices with minimal setup.
 - [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/): Handles SQLAlchemy database migrations for Flask applications using Alembic.
-- [Flask-SqlAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/): https://flask-sqlalchemy.palletsprojects.com/en/2.x/
+- [Flask-SqlAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/): Flask-SQLAlchemy, a wrapper to the sqlalchemy orm
 - [Flask-Cors](https://flask-cors.readthedocs.io/en/latest/): A Flask extension for handling Cross Origin Resource Sharing (CORS), making cross-origin AJAX possible.
 - [Flask-Testing](https://pythonhosted.org/Flask-Testing/): Because test driven is cool
 - [Flask-Praetorian](https://github.com/dusktreader/flask-praetorian): Strong, Simple, and Precise security for Flask APIs (using jwt)
 - [PostgreSQL](https://www.postgresql.org/): The database of choice
+
+### Optional Integrations
+
+- [Sentry.io](https://sentry.io) :: Sentry is an open-source application monitoring platform that helps you identify issues in real-time.
 
 ## Usage
 
@@ -113,7 +118,7 @@ make docker-compose-build # Docker
 
 [(Back to top)](#table-of-contents)
 
-```sh
+```bash
 make down # shut down all docker-compose related services
 cd ../ # move down one directory
 rm -rf flask-auth  # delete service directory

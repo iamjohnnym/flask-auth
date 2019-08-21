@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import datetime
-
-from flask import current_app
 from service.api.extensions import guard, db
 
 
@@ -126,9 +123,9 @@ class User(Model, SurrogatePK):
         return cls.query.filter_by(email=email).one_or_none()
 
     @classmethod
-    def identify(cls, id):
+    def identify(cls, user_id):
         """Get User by id"""
-        return cls.query.get(id)
+        return cls.query.get(user_id)
 
     @property
     def identity(self):

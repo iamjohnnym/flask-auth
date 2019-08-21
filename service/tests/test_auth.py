@@ -1,14 +1,12 @@
 import json
 import unittest
-import time
 from flask import current_app
 
 from service import db
 from service.api.models import User
 from service.tests.base import BaseTestCase
 from service.tests.utils import add_user, get_user_token, login_user, \
-    JsonExtendEncoder, convert_timestamp
-import datetime
+    JsonExtendEncoder
 
 
 class TestAuthBlueprint(BaseTestCase):

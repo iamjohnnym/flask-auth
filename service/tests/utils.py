@@ -1,4 +1,5 @@
 from service import db
+# Codacy lies, this is used.
 from service.api.extensions import guard
 from service.api.models import User
 

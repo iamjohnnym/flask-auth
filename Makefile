@@ -1,7 +1,7 @@
 excludes = \*~ \*.pyc .cache/\* test_\* __pycache__/\*
 
 e?=dev
-SERVICE=flask-restplus-auth
+SERVICE=flask-auth
 
 export ${SERVICE}
 export ${e}
@@ -24,9 +24,17 @@ bandit:
 flake:
 	poetry run flake8 service
 
+.PHONY: docker-lint
+docker-lint:
+	docker run --rm -i hadolint/hadolint < Dockerfile
+
 .PHONY: test
 test:
 	poetry run python manage.py cov
+
+.PHONY: push-converge
+push-converge:
+	poetry run python-codacy-coverage -r coverage.xml
 
 .PHONY: run
 run:

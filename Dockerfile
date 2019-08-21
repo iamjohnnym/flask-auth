@@ -1,36 +1,33 @@
 # base image
 FROM python:3.7.0-alpine
 
-# install dependencies
-# RUN apk update && \
-#    apk add --virtual git build-deps gcc python-dev musl-dev libffi-dev libc-dev ; \
-#    apk add postgresql-dev ; \
-#    apk add netcat-openbsd
-
 # set working directory
 WORKDIR /usr/src/app
 
+SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 # install poetry
-RUN pip install poetry ; \
-    poetry config settings.virtualenvs.create false
+# hadolint ignore=DL3018,SC1090
+RUN apk --no-cache add --virtual build-deps curl \
+    && curl -sSL "https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py" | python \
+    # shellcheck source=/root/.poetry/env
+    && . "${HOME}/.poetry/env" \
+    && poetry config settings.virtualenvs.create false
 
-ADD ./pyproject.toml /usr/src/app/pyproject.toml
+COPY ./pyproject.toml /usr/src/app/pyproject.toml
 # I dont know if you should exist, yet.
 # ADD ./poetry.lock /usr/src/app/poetry.lock
 
-# RUN poetry run pip install --upgrade pip
+# hadolint ignore=DL3018,SC1090
+RUN apk --no-cache add postgresql-dev
 
-# install dependencies
-# RUN poetry install
-# RUN apk del .build-deps gcc
-
-RUN apk --update add postgresql-dev
-RUN apk --update add --virtual build-deps git gcc python-dev musl-dev libffi-dev libc-dev \
-  && poetry install \
-  && apk del build-deps
+# hadolint ignore=DL3018,SC1090
+RUN apk --no-cache add --virtual build-deps git gcc python-dev musl-dev libffi-dev libc-dev \
+    # shellcheck source=/root/.poetry/env
+    && . "${HOME}/.poetry/env" \
+    && poetry install
 
 # add app
-COPY . /usr/src/app
+COPY ./ /usr/src/app
 
 # run server
 CMD ["/usr/src/app/entrypoint.sh"]

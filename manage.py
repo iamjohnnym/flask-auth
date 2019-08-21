@@ -63,6 +63,15 @@ def test():
         return 0
     sys.exit(result)
 
+# wip
+@cli.command('sentry_pr_release')
+def sentry_pr_release():
+    """Create a release for sentry.io"""
+    import sentry_sdk
+    print(sentry_sdk.init(
+        dsn=f"{app.config['SENTRY_URL']}",
+        release="flask-auth@0.1.0-alpha0"))
+
 
 @cli.command()
 def cov():
@@ -75,6 +84,7 @@ def cov():
         print('Coverage Summary:')
         COV.report()
         COV.html_report()
+        COV.xml_report()
         COV.erase()
         return 0
     sys.exit(result)
