@@ -37,6 +37,16 @@ def create_app(script_info=None):
     from service.api.users import ns as users
     from service.api.auth import ns as auth
 
+    if app.config['SENTRY_URL']:
+        import sentry_sdk
+        from sentry_sdk.integrations.flask import FlaskIntegration
+        from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
+
+        sentry_sdk.init(
+            dsn=f"{app.config['SENTRY_URL']}",
+            environment=f"{app.config['SENTRY_ENVIRONMENT']}",
+            integrations=[FlaskIntegration(), SqlalchemyIntegration()])
+
     app.register_blueprint(api_bp)
     # shell context for flask cli
     @app.shell_context_processor
