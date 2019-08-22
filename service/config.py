@@ -28,7 +28,7 @@ class DevelopmentConfig(BaseConfig):
 class TestingConfig(BaseConfig):
     """Testing configuration"""
     TESTING = True
-    SECRET_KEY = 'testing-and-thats-it'
+    SECRET_KEY = 'testing-and-thats-it'  # nosec
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
     SENTRY_ENVIRONMENT = os.environ.get('SENTRY_ENVIRONMENT', 'testing')
 
@@ -36,7 +36,7 @@ class TestingConfig(BaseConfig):
 class GithubTestingConfig(BaseConfig):
     """Testing configuration"""
     TESTING = True
-    SECRET_KEY = 'testing-in-github-thats-it'
+    SECRET_KEY = 'testing-in-github-thats-it'  # nosec
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
     # heh, sorry not sorry.
     SENTRY_ENVIRONMENT = \

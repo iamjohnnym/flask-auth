@@ -16,7 +16,7 @@ bandit:
 # habits and returns non-zero if threshold is met.  -ll means were looking
 # for a severity of medium and confidence of low.
 # ['undefined', 'low', 'medium', 'high']
-	poetry run bandit -ll -i -x service/tests/ -r service/ --format custom \
+	poetry run bandit -c bandit.yml -r . --format custom \
 	--msg-template \
 	"{abspath}:{line}: {test_id}[bandit]: {severity}: {msg}"
 
