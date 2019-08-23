@@ -1,4 +1,4 @@
 [bandit]
-exclude: ./.venv,tests/
+exclude: ./.venv,tests/,get-poetry.py
 recursive = true
-targets = ./
+targets = ./manage.py,./service
